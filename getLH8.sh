@@ -65,6 +65,19 @@ fi
 
 #	echo "Add Call: $call" >> /home/pi-star/lh2_start.txt
 	dataline=$(sudo sed -n "/$call/p" /usr/local/etc/stripped2.csv)
+
+status=$?
+
+if [ ! "$status" -eq 0 ]; then
+  did="N/A"
+  call1="N/A"
+  name="N/A"
+  city="N/A"
+  prov="N/A"
+  country="N/A"
+
+else
+
        	did=$(echo "$dataline" | cut -d',' -f1 | head -1)
         call1=$(echo "$dataline" | cut -d',' -f2 | head -1)
 
@@ -76,7 +89,7 @@ fi
 	if [ -z "$name" ]; then
 		name="Name N/A"
 	fi
-
+fi
 
 #	line3=$(echo  "$dt" "$tm" "$call" "$name" | awk '{printf  "%5s %s %s %s|\n", $1 $2 $3 $name}')
 	line3=""
